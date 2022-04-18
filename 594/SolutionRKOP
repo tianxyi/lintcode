@@ -1,0 +1,31 @@
+public class Solution {
+    /**
+     * @param source: A source string
+     * @param target: A target string
+     * @return: An integer as index
+     */
+    static final int P = 131;
+    public int strStr2(String source, String target) {
+        // write your code here
+        int n = source.length(), m = target.length();
+        if (n < m) return -1;
+        if (m == 0) return 0;
+        source = " " + source; target = " " + target;
+        long[] sum = new long[n + 1];
+        for (int i = 1; i <= n; i++) {
+            sum[i] = sum[i - 1] * P + source.charAt(i); 
+        }
+        long t = 0;
+        long e = 1;
+        for (int i = 1; i <= m; i++) {
+            t = t * P + target.charAt(i);
+            e = e * P;
+        }
+        for (int i = m; i <= n; i++) {
+            int r = i, l = i - m + 1;
+            if (t == sum[r] - sum[l - 1] * e) return l - 1;
+        }
+ 
+        return -1;
+    }
+}
