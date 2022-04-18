@@ -1,0 +1,28 @@
+public class Solution {
+    /**
+     * @param source: A source string
+     * @param target: A target string
+     * @return: An integer as index
+     */
+    public int strStr2(String source, String target) {
+        // write your code here
+        int n = source.length(), m = target.length();
+        if (m == 0) return 0;
+        String s = " " + source, t = " " + target;
+        int i = 2, j = 0, nt[] = new int[m + 1];
+        for (; i <= m; i++) {
+            while (j > 0 && t.charAt(i) != t.charAt(j + 1)) j = nt[j];
+            if (t.charAt(i) == t.charAt(j + 1)) j++;
+            nt[i] = j;
+        }
+        i = 1; j = 0;
+        for (; i <= n; i++) {
+            while (j > 0 && s.charAt(i) != t.charAt(j + 1)) j = nt[j];
+            if (s.charAt(i) == t.charAt(j + 1)) j++;
+            if (j == m) {
+                return i - j;
+            }
+        }
+        return -1;
+    }
+}
