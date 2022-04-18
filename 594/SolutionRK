@@ -1,0 +1,34 @@
+//Bug
+public class Solution {
+    /**
+     * @param source: A source string
+     * @param target: A target string
+     * @return: An integer as index
+     */
+    static final int P = 131, Q = 1000000000 + 7;
+    public int strStr2(String source, String target) {
+        // write your code here
+        int n = source.length(), m = target.length();
+        if (n < m) return -1;
+        if (m == 0) return 0;
+        long t = 0;
+        long s = 0;
+        long e = 1;
+        for (int i = 0; i < m; i++) {
+            t = ((t * P) % Q  + target.charAt(i)) % Q;
+            s = ((s * P) % Q  + source.charAt(i)) % Q;
+            e = (e * P) % Q;
+
+        }
+        
+        for (int i = m - 1; i < n; i++) {
+            System.out.println(s);
+            if (s == t) return i - m;
+            s = (((s * P) % Q - e)%Q) % Q;
+            if (i + 1 < n) {
+                s = (s + source.charAt(i + 1)) % Q;
+            }
+        }
+        return -1;
+    }
+}
