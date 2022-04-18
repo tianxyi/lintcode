@@ -3,6 +3,7 @@ since the distance on row, col could be consider separate, we could first prepro
 how many house in each row and col.
 And then we could calculate the cost in each row and column 
 And then add them together should be the final distance
+O(n * m)
 */
 public class Solution {
     /**
